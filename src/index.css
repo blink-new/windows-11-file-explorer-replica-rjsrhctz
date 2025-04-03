@@ -5,65 +5,75 @@
  
 @layer base {
   :root {
+    /* Windows 11 colors */
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
+    --foreground: 222 14% 18%;
+    
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
- 
+    --card-foreground: 222 14% 18%;
+    
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
- 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
- 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
- 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
- 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
- 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --popover-foreground: 222 14% 18%;
+    
+    /* Windows blue */
+    --primary: 207 90% 54%;
+    --primary-foreground: 0 0% 100%;
+    
+    /* Light gray for secondary elements */
+    --secondary: 210 14% 97%;
+    --secondary-foreground: 222 14% 18%;
+    
+    /* Subtle gray for muted elements */
+    --muted: 210 14% 95%;
+    --muted-foreground: 215 14% 45%;
+    
+    /* Accent follows primary */
+    --accent: 207 90% 96%;
+    --accent-foreground: 207 90% 54%;
+    
+    /* Windows red */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Subtle borders */
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 207 90% 54%;
  
+    /* Windows 11 default radius */
     --radius: 0.5rem;
   }
  
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    /* Windows 11 dark theme colors */
+    --background: 222 14% 18%;
+    --foreground: 0 0% 100%;
  
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 222 14% 18%;
+    --card-foreground: 0 0% 100%;
  
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 222 14% 18%;
+    --popover-foreground: 0 0% 100%;
  
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    /* Windows blue adjusted for dark theme */
+    --primary: 207 90% 54%;
+    --primary-foreground: 0 0% 100%;
  
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 217 14% 22%;
+    --secondary-foreground: 0 0% 100%;
  
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 217 14% 22%;
+    --muted-foreground: 215 14% 65%;
  
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 207 90% 30%;
+    --accent-foreground: 0 0% 100%;
  
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
  
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --border: 217 14% 25%;
+    --input: 217 14% 25%;
+    --ring: 207 90% 54%;
   }
 }
  
@@ -71,7 +81,89 @@
   * {
     @apply border-border;
   }
+  
   body {
     @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
   }
+
+  /* Windows 11 Segoe UI Variable font */
+  @font-face {
+    font-family: 'Segoe UI Variable';
+    src: local('Segoe UI Variable'), local('Segoe UI');
+    font-weight: 200 700;
+    font-style: normal;
+  }
+}
+
+@layer components {
+  /* Windows 11 Mica effect */
+  .mica {
+    @apply bg-background/80 backdrop-blur-xl backdrop-saturate-150;
+  }
+
+  /* Windows 11 acrylic effect */
+  .acrylic {
+    @apply bg-background/60 backdrop-blur-lg backdrop-saturate-150;
+  }
+
+  /* Windows 11 button styles */
+  .win-button {
+    @apply px-4 py-2 rounded-md bg-secondary hover:bg-secondary/80 
+           active:bg-secondary/60 transition-colors duration-200
+           focus:outline-none focus:ring-2 focus:ring-primary/30;
+  }
+
+  .win-button-primary {
+    @apply px-4 py-2 rounded-md bg-primary text-primary-foreground
+           hover:bg-primary/90 active:bg-primary/80 transition-colors duration-200
+           focus:outline-none focus:ring-2 focus:ring-primary/30;
+  }
+
+  /* Windows 11 card styles */
+  .win-card {
+    @apply rounded-lg border bg-card p-4 shadow-sm;
+  }
+
+  /* Windows 11 input styles */
+  .win-input {
+    @apply rounded-md border border-input bg-transparent px-3 py-2
+           focus:outline-none focus:ring-2 focus:ring-primary/30
+           disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  /* Windows 11 menu styles */
+  .win-menu {
+    @apply rounded-lg border bg-popover p-1 shadow-md;
+  }
+
+  .win-menu-item {
+    @apply flex items-center rounded-md px-3 py-2 text-sm
+           hover:bg-accent hover:text-accent-foreground
+           focus:bg-accent focus:text-accent-foreground
+           focus:outline-none cursor-pointer;
+  }
+
+  /* Windows 11 title bar */
+  .win-titlebar {
+    @apply mica flex items-center justify-between px-4 py-2 select-none;
+  }
+
+  /* Windows 11 window */
+  .win-window {
+    @apply rounded-lg border shadow-lg overflow-hidden;
+  }
+}
+
+/* Windows 11 scrollbar */
+::-webkit-scrollbar {
+  @apply w-2;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-muted-foreground/20 rounded-full hover:bg-muted-foreground/30;
 }
