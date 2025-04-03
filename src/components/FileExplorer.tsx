@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react'
-import { ChevronRight, Grid, List, Home, Folder, File, Settings, ChevronDown, Search, Star, Download, Desktop, Images, Documents } from 'lucide-react'
+import { ChevronRight, Grid, List, Home, Folder, File, Settings, ChevronDown, Search, Star, Download, Monitor, Image } from 'lucide-react'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 import { cn } from '../lib/utils'
 
@@ -90,11 +90,11 @@ export function FileExplorer() {
               <span>Home</span>
             </button>
             <button className="win-menu-item w-full justify-start">
-              <Desktop className="w-4 h-4 mr-3 win-icon" />
+              <Monitor className="w-4 h-4 mr-3 win-icon" />
               <span>Desktop</span>
             </button>
             <button className="win-menu-item w-full justify-start">
-              <Documents className="w-4 h-4 mr-3 win-icon" />
+              <File className="w-4 h-4 mr-3 win-icon" />
               <span>Documents</span>
             </button>
             <button className="win-menu-item w-full justify-start">
@@ -102,7 +102,7 @@ export function FileExplorer() {
               <span>Downloads</span>
             </button>
             <button className="win-menu-item w-full justify-start">
-              <Images className="w-4 h-4 mr-3 win-icon" />
+              <Image className="w-4 h-4 mr-3 win-icon" />
               <span>Pictures</span>
             </button>
             <button className="win-menu-item w-full justify-start">
