@@ -3,7 +3,9 @@ import { FileExplorer } from './components/FileExplorer'
 
 function App() {
   return (
-    <FileExplorer />
+    <div className="h-screen w-screen overflow-hidden">
+      <FileExplorer />
+    </div>
   )
 }
 

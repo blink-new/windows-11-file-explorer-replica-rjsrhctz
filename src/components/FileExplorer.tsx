@@ -23,90 +23,86 @@ export function FileExplorer() {
   ]
 
   const toggleTheme = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light')
+    const newTheme = theme === 'light' ? 'dark' : 'light'
+    setTheme(newTheme)
+    document.documentElement.classList.toggle('dark', newTheme === 'dark')
   }
 
   return (
-    <div className={cn(
-      'h-screen flex flex-col',
-      theme === 'dark' ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'
-    )}>
-      {/* Top Menu Bar */}
-      <div className={cn(
-        'flex items-center p-1 border-b',
-        theme === 'dark' ? 'border-gray-700' : 'border-gray-200'
-      )}>
-        <DropdownMenu.Root>
-          <DropdownMenu.Trigger className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors">
-            File
-            <ChevronDown className="inline ml-1 w-4 h-4" />
-          </DropdownMenu.Trigger>
-          <DropdownMenu.Portal>
-            <DropdownMenu.Content className={cn(
-              'min-w-[200px] rounded-lg shadow-lg p-2',
-              theme === 'dark' ? 'bg-gray-800' : 'bg-white'
-            )}>
-              <DropdownMenu.Item className="flex items-center p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded cursor-pointer">
-                New Folder
-              </DropdownMenu.Item>
-              <DropdownMenu.Item className="flex items-center p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded cursor-pointer">
-                New File
-              </DropdownMenu.Item>
-              <DropdownMenu.Separator className="my-2 h-px bg-gray-200 dark:bg-gray-700" />
-              <DropdownMenu.Item className="flex items-center p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded cursor-pointer">
-                Exit
-              </DropdownMenu.Item>
-            </DropdownMenu.Content>
-          </DropdownMenu.Portal>
-        </DropdownMenu.Root>
-
+    <div className="win-window h-full">
+      {/* Title Bar */}
+      <div className="win-titlebar">
+        <div className="flex items-center space-x-2">
+          <Folder className="w-5 h-5 text-primary" />
+          <span className="text-sm font-medium">File Explorer</span>
+        </div>
         <button
           onClick={toggleTheme}
-          className="ml-auto p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
+          className="win-button-icon"
         >
           <Settings className="w-4 h-4" />
         </button>
       </div>
 
+      {/* Menu Bar */}
+      <div className="flex items-center p-1 border-b border-border bg-card">
+        <DropdownMenu.Root>
+          <DropdownMenu.Trigger className="win-button text-sm">
+            File
+            <ChevronDown className="inline ml-1 w-4 h-4" />
+          </DropdownMenu.Trigger>
+          <DropdownMenu.Portal>
+            <DropdownMenu.Content className="win-menu animate-fade-in">
+              <DropdownMenu.Item className="win-menu-item">
+                New Folder
+              </DropdownMenu.Item>
+              <DropdownMenu.Item className="win-menu-item">
+                New File
+              </DropdownMenu.Item>
+              <DropdownMenu.Separator className="my-2 h-px bg-border" />
+              <DropdownMenu.Item className="win-menu-item">
+                Exit
+              </DropdownMenu.Item>
+            </DropdownMenu.Content>
+          </DropdownMenu.Portal>
+        </DropdownMenu.Root>
+      </div>
+
       <div className="flex flex-1 overflow-hidden">
         {/* Sidebar */}
-        <div className={cn(
-          'w-64 p-4 border-r overflow-y-auto',
-          theme === 'dark' ? 'border-gray-700' : 'border-gray-200'
-        )}>
-          <div className="flex items-center p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg cursor-pointer">
-            <Home className="w-4 h-4 mr-2" />
-            <span>Home</span>
-          </div>
-          <div className="flex items-center p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg cursor-pointer">
-            <Folder className="w-4 h-4 mr-2" />
-            <span>Documents</span>
-          </div>
-          <div className="flex items-center p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg cursor-pointer">
-            <Folder className="w-4 h-4 mr-2" />
-            <span>Pictures</span>
+        <div className="w-64 border-r border-border bg-card/50">
+          <div className="p-2 space-y-1">
+            <button className="win-menu-item w-full justify-start">
+              <Home className="w-4 h-4 mr-3" />
+              <span>Home</span>
+            </button>
+            <button className="win-menu-item w-full justify-start">
+              <Folder className="w-4 h-4 mr-3" />
+              <span>Documents</span>
+            </button>
+            <button className="win-menu-item w-full justify-start">
+              <Folder className="w-4 h-4 mr-3" />
+              <span>Pictures</span>
+            </button>
           </div>
         </div>
 
         {/* Main Content */}
-        <div className="flex-1 overflow-hidden flex flex-col">
+        <div className="flex-1 flex flex-col bg-background">
           {/* Breadcrumb */}
-          <div className={cn(
-            'flex items-center p-2 border-b',
-            theme === 'dark' ? 'border-gray-700' : 'border-gray-200'
-          )}>
-            <span className="hover:bg-gray-100 dark:hover:bg-gray-800 px-2 py-1 rounded cursor-pointer">Home</span>
-            <ChevronRight className="w-4 h-4" />
-            <span className="hover:bg-gray-100 dark:hover:bg-gray-800 px-2 py-1 rounded cursor-pointer">Documents</span>
+          <div className="flex items-center p-2 border-b border-border bg-card/50">
+            <button className="win-menu-item py-1">Home</button>
+            <ChevronRight className="w-4 h-4 mx-1 text-muted-foreground" />
+            <button className="win-menu-item py-1">Documents</button>
           </div>
 
           {/* View Toggle */}
-          <div className="flex items-center p-2">
+          <div className="flex items-center p-2 bg-card/50">
             <button
               onClick={() => setViewMode('grid')}
               className={cn(
-                'p-2 rounded-lg mr-2',
-                viewMode === 'grid' ? 'bg-gray-100 dark:bg-gray-800' : 'hover:bg-gray-100 dark:hover:bg-gray-800'
+                'win-button-icon mr-1',
+                viewMode === 'grid' && 'bg-accent text-accent-foreground'
               )}
             >
               <Grid className="w-4 h-4" />
@@ -114,8 +110,8 @@ export function FileExplorer() {
             <button
               onClick={() => setViewMode('list')}
               className={cn(
-                'p-2 rounded-lg',
-                viewMode === 'list' ? 'bg-gray-100 dark:bg-gray-800' : 'hover:bg-gray-100 dark:hover:bg-gray-800'
+                'win-button-icon',
+                viewMode === 'list' && 'bg-accent text-accent-foreground'
               )}
             >
               <List className="w-4 h-4" />
@@ -124,34 +120,34 @@ export function FileExplorer() {
 
           {/* Files Display */}
           <div className={cn(
-            'flex-1 p-4 overflow-y-auto',
-            viewMode === 'grid' ? 'grid grid-cols-4 gap-4' : 'flex flex-col space-y-2'
+            'flex-1 p-4 overflow-y-auto bg-background',
+            viewMode === 'grid' ? 'grid grid-cols-4 gap-4' : 'flex flex-col space-y-1'
           )}>
             {dummyFiles.map((file, index) => (
               <div
                 key={index}
                 className={cn(
-                  'group cursor-pointer',
+                  'group animate-fade-in',
                   viewMode === 'grid'
-                    ? 'p-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 flex flex-col items-center'
-                    : 'p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 flex items-center'
+                    ? 'win-card hover:bg-accent hover:text-accent-foreground flex flex-col items-center p-4'
+                    : 'win-menu-item'
                 )}
               >
                 {file.type === 'folder' ? (
                   <Folder className={cn(
-                    'group-hover:text-blue-500',
-                    viewMode === 'grid' ? 'w-16 h-16 mb-2' : 'w-6 h-6 mr-3'
+                    'text-primary',
+                    viewMode === 'grid' ? 'w-16 h-16 mb-2' : 'w-5 h-5 mr-3'
                   )} />
                 ) : (
                   <File className={cn(
-                    'group-hover:text-blue-500',
-                    viewMode === 'grid' ? 'w-16 h-16 mb-2' : 'w-6 h-6 mr-3'
+                    'text-primary',
+                    viewMode === 'grid' ? 'w-16 h-16 mb-2' : 'w-5 h-5 mr-3'
                   )} />
                 )}
                 <div className={viewMode === 'grid' ? 'text-center' : 'flex-1'}>
                   <div className="font-medium">{file.name}</div>
                   {viewMode === 'list' && (
-                    <div className="text-sm text-gray-500 dark:text-gray-400">
+                    <div className="text-sm text-muted-foreground">
                       {file.size && <span className="mr-4">{file.size}</span>}
                       {file.modified}
                     </div>
@@ -164,10 +160,7 @@ export function FileExplorer() {
       </div>
 
       {/* Status Bar */}
-      <div className={cn(
-        'p-2 border-t flex items-center text-sm',
-        theme === 'dark' ? 'border-gray-700' : 'border-gray-200'
-      )}>
+      <div className="win-titlebar justify-start text-sm">
         <span>{dummyFiles.length} items</span>
       </div>
     </div>
