@@ -1,9 +1,10 @@
-import { useState } from 'react'
+
+import { FileExplorer } from './components/FileExplorer'
 
 function App() {
   return (
-    <div></div>
+    <FileExplorer />
   )
 }
 
-export default App 
+export default App
